@@ -55,14 +55,29 @@
     font-weight: 700;
     letter-spacing: -2px;
     color: var(--fg);
-    margin-bottom: 10px;
+    margin-bottom: 4px;
   }
 
   .hero-tag {
     font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1.35;
+    color: #979089;
+    max-width: none;
+  }
+
+  .hero-tag-strong {
+    color: var(--fg);
+  }
+
+  .hero-subhead {
     font-size: 21px;
     font-weight: 300;
+    line-height: 1.5;
     color: var(--dim);
+    max-width: 42rem;
+    margin-top: 18px;
   }
 
   .rule {
@@ -215,6 +230,21 @@
     color: var(--accent);
   }
 
+  .inline-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .inline-link:visited {
+    color: var(--accent);
+  }
+
+  .inline-link:hover {
+    border-bottom-color: var(--accent);
+  }
+
   .status {
     margin: 36px 0;
     border-top: 1px solid var(--border);
@@ -312,7 +342,8 @@
 
   <header class="hero">
     <h1>ockham</h1>
-    <div class="hero-tag">Intelligence infrastructure. No ghosts. Just machines.</div>
+    <div class="hero-tag">Control planes for AI workflows. <span class="hero-tag-strong">No ghosts. Just machines.</span></div>
+    <div class="hero-subhead">Replay + regression testing for production AI workflows.</div>
   </header>
 
   <div class="rule"></div>
@@ -320,88 +351,28 @@
   <section class="s">
     <div class="s-label">The Problem</div>
     <p>
-      Most AI infrastructure asks you to believe in ghosts.
-      It wraps an LLM call in a persona, gives it a name and a memory, 
-      calls it an <em>agent</em>, and charges you for the privilege of 
-      sending the same context tokens to every ghost in the room.
+      Most AI infrastructure still asks teams to think in <em>ghosts</em>.
     </p>
     <p>
-      Strip the metaphor and look at the computation: it's a stateless 
-      function with a large, loosely-typed output space, high latency, 
-      and non-trivial cost per invocation. The interesting engineering 
-      problems — scheduling, state management, failure recovery, context 
-      budgeting — are distributed systems problems. They have been solved 
-      before. The ghost adds nothing.
+      When workflows are framed as personalities with memory, judgment, and collaboration,
+      teams stop designing around explicit state, control flow, validation, and reproducible
+      behavior. The system becomes harder to test, harder to compare, and harder to change safely.
+      Control surfaces get fuzzier. Small prompt changes affect too much at once. Evals drift
+      toward vibes. Debugging becomes interpretation instead of procedure.
+    </p>
+    <p>
+      The result is familiar: brittle workflows, silent regressions, manual QA, and production
+      changes that feel riskier than they should.
     </p>
   </section>
 
   <div class="thesis">
     <p>
-      An agent is a process with a system prompt, tool access, and shared state. 
-      There is no further entity.
-      Ockham gives you the process and the state 
-      so you can <strong style="color: var(--accent)">exorcise your agents.</strong>
+      Ockham is built on a simple rule: <strong style="color: var(--accent)">don't replace systems engineering with ghost stories.</strong>
+      Treat AI workflows as systems to control, test, replay, and verify, not personalities to coax,
+      interpret, and hope behave.
     </p>
   </div>
-
-  <section class="s">
-    <div class="s-label">The Stack</div>
-    <p>
-      Seven components. Each replaces a ghost with a machine.
-    </p>
-
-    <div class="stack">
-      <div class="stack-row">
-        <div class="stack-name">Corvus</div>
-        <div class="stack-text">
-          Trace-based workflow observability. Captures evidence, detects failure patterns, validates interventions.
-          <span class="ghost">Replaces: "the agents are collaborating."</span>
-        </div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-name">Razor</div>
-        <div class="stack-text">
-          Dynamic task graph runtime. Context selectors, graph mutation, cost-aware scheduling.
-          <span class="ghost">Replaces: "the agent decided."</span>
-        </div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-name">Fabric</div>
-        <div class="stack-text">
-          Session state, event and claim storage, structured retrieval with provenance.
-          <span class="ghost">Replaces: "the agent remembers."</span>
-        </div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-name">Plexus</div>
-        <div class="stack-text">
-          Portable IR for hybrid graph-vector queries. Parse, optimize, execute across engines.
-          <span class="ghost">Replaces: "the agent knows."</span>
-        </div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-name">Lattice</div>
-        <div class="stack-text">
-          Rust platform runtime for GraphRAG. Tiered storage, transport, telemetry, assurance.
-          <span class="ghost">Replaces: "the agent has access."</span>
-        </div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-name">Forge</div>
-        <div class="stack-text">
-          Distributed actor runtime. Deterministic testing, strict isolation, multi-node orchestration.
-          <span class="ghost">Replaces: "the agents are running."</span>
-        </div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-name">Sim</div>
-        <div class="stack-text">
-          Deterministic simulation and assurance evidence generation.
-          <span class="ghost">Replaces: "it worked in the demo."</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="s">
     <div class="s-label">The Machine, Not the Ghost</div>
@@ -410,27 +381,25 @@
       <div class="dual-col y">
         <h3>What we build</h3>
         <ul>
-          <li>Task graphs, not agent graphs</li>
-          <li>Context as a managed resource</li>
-          <li>Structured state with provenance</li>
-          <li>Deterministic testing</li>
-          <li>Cost-aware execution</li>
-          <li>Strict process isolation</li>
-          <li>Portable query representations</li>
-          <li>Trace-based observability</li>
+          <li>Replay + regression for AI workflows</li>
+          <li>Explicit state, routing, validation</li>
+          <li>Workflow verification</li>
+          <li>Reproducible debugging</li>
+          <li>Evidence from real runs</li>
+          <li>Safer production changes</li>
+          <li>Control surfaces you can reason about</li>
         </ul>
       </div>
       <div class="dual-col n">
         <h3>What we don't</h3>
         <ul>
-          <li>Agent identities</li>
           <li>Persona-driven orchestration</li>
-          <li>Inter-agent messaging</li>
-          <li>Turn-based debates</li>
-          <li>Anthropomorphic abstractions</li>
-          <li>Email for your LLM calls</li>
+          <li>Hidden state as architecture</li>
+          <li>Inter-agent mythology</li>
           <li>Vibes-based verification</li>
-          <li>Marketecture</li>
+          <li>Interpretive debugging</li>
+          <li>Rerun-and-hope releases</li>
+          <li>Marketecture over control</li>
         </ul>
       </div>
     </div>
@@ -439,8 +408,7 @@
   <section class="s">
     <div class="s-label">Interoperability</div>
     <p>
-      We don't need the industry to agree that agents aren't real.
-      We just need infrastructure that doesn't require them to be.
+      Ockham can work with the protocols without inheriting the ghost story.
     </p>
     <div class="callout">
       <p>
@@ -469,58 +437,10 @@
       <span class="tag">Make / Bazel</span>
     </div>
     <p style="margin-top: 16px;">
-      The novel surface is narrow and honest: declarative context projection
-      for bounded LLM windows, schema validation for loosely-typed outputs,
-      and cost-aware scheduling for pay-per-token computation.
-      Everything else is borrowed. That's the point.
+      The novel surface is narrow and honest: replayable workflow evidence,
+      reusable regression cases from real runs, and safer prompt, model, and
+      workflow changes in production. Everything else is borrowed. That's the point.
     </p>
-  </section>
-
-  <section class="s">
-    <div class="s-label">Status</div>
-
-    <div class="status">
-      <div class="status-row">
-        <div class="status-name">Corvus</div>
-        <div class="status-what">Workflow observability</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Forge</div>
-        <div class="status-what">Actor runtime</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Plexus</div>
-        <div class="status-what">Graph-vector IR</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Lattice</div>
-        <div class="status-what">GraphRAG platform</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Fabric</div>
-        <div class="status-what">Memory &amp; state</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Sieve</div>
-        <div class="status-what">Layered caching</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Sim</div>
-        <div class="status-what">Deterministic simulation</div>
-        <div class="status-badge live">Active</div>
-      </div>
-      <div class="status-row">
-        <div class="status-name">Razor</div>
-        <div class="status-what">Task graph runtime</div>
-        <div class="status-badge wip">Building</div>
-      </div>
-    </div>
   </section>
 
   <section class="s">
@@ -530,6 +450,14 @@
       Because strict type systems prevent the category errors we're
       trying to eliminate. Because infrastructure that outlasts hype
       cycles should be built in a language designed to outlast hype cycles.
+    </p>
+  </section>
+
+  <section class="s">
+    <div class="s-label">Contact</div>
+    <p>
+      If you're building production AI workflows and want to compare notes,
+      reach out at <a class="inline-link" href="mailto:inbox@robertdberry.com">inbox@robertdberry.com</a>.
     </p>
   </section>
 
